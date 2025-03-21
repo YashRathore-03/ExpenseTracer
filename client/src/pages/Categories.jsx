@@ -16,7 +16,7 @@ function Categories() {
 
   const dispatch = useDispatch();
 
-  const { categories, isLoading, isError, isSuccess, message } = useSelector(
+  const { categories, isLoading, isError, message } = useSelector(
     (state) => state.categories
   );
 
