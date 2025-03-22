@@ -1,36 +1,25 @@
 services:
-  # Backend service
   - type: web
-    name: backend
+    name: expensetracer-backend
     env: node
-    buildCommand: cd server && npm install
-    startCommand: cd server && node server.js
+    buildCommand: npm install
+    startCommand: node server.js
     envVars:
       - key: MONGODB_URI
         sync: false
       - key: JWT_SECRET
         generateValue: true
-      - key: NODE_ENV
-        value: production
-    autoDeploy: true
 
-  # Frontend service
   - type: web
-    name: frontend
+    name: expensetracer-frontend
     env: static
-    buildCommand: cd client && npm install && npm run build
-    staticPublishPath: ./client/build
+    buildCommand: npm run build
+    staticPublishPath: build
     envVars:
-      - key: REACT_APP_API_URL
+      - key: REACT_APP_API_BASE
         fromService:
+          name: expensetracer-backend
           type: web
-          name: backend
-          property: host
-    autoDeploy: true
-
-# Database (if you want to use Render's managed database)
-databases:
-  - name: expensetracer-db
-    databaseName: expensetracer
-    user: expensetracer_user
-
+          property: hostport
+      - key: REACT_APP_API_URL
+        value: https://${REACT_APP_API_BASE}/api/v1
