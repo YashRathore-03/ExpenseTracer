@@ -5,6 +5,11 @@ const connectDB = require('./config/db');
 
 dotenv.config();
 
+if (!process.env.MONGO_URI) {
+  console.error("Error: MONGO_URI is not defined in .env file");
+  process.exit(1); 
+}
+
 connectDB();
 
 const app = express();
