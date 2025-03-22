@@ -9,7 +9,12 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://your-vercel-frontend-url.vercel.app' 
+    : 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
 
 app.use('/api/users', require('./routes/users')); 
