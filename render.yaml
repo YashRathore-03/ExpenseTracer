@@ -1,7 +1,7 @@
 services:
   # Backend service
   - type: web
-    name: expensetracer-backend
+    name: backend
     env: node
     buildCommand: cd server && npm install
     startCommand: cd server && node server.js
@@ -16,7 +16,7 @@ services:
 
   # Frontend service
   - type: web
-    name: expensetracer-frontend
+    name: frontend
     env: static
     buildCommand: cd client && npm install && npm run build
     staticPublishPath: ./client/build
@@ -24,8 +24,8 @@ services:
       - key: REACT_APP_API_URL
         fromService:
           type: web
-          name: expensetracer-backend
-          property: url
+          name: backend
+          property: host
     autoDeploy: true
 
 # Database (if you want to use Render's managed database)
