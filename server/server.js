@@ -3,23 +3,19 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-// Load environment variables first
 dotenv.config();
 
-// Define allowed origins
 const allowedOrigins = [
   'https://expense-tracer-git-main-yashrathore-03s-projects.vercel.app',
-  'https://expense-tracer-murex.vercel.app',  // Add your main Vercel domain
+  'https://expense-tracer-murex.vercel.app',  
   'http://localhost:3000'
 ];
 
-// Create Express app
+
 const app = express();
 
-// Improved CORS configuration with error handling
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
     if (allowedOrigins.indexOf(origin) === -1) {
@@ -33,10 +29,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Parse JSON request bodies
 app.use(express.json());
 
-// Database connection with better error handling
 const connectDB = async () => {
   try {
     if (!process.env.MONGODB_URI) {
@@ -52,8 +46,6 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
-
-// Connect to database
 connectDB();
 
 // Basic health check route
@@ -79,18 +71,15 @@ app.use((err, req, res, next) => {
   // Determine appropriate status code
   const statusCode = err.statusCode || 500;
   
-  // Send error response
   res.status(statusCode).json({
     message: process.env.NODE_ENV === 'production' ? 'Server Error' : err.message,
     stack: process.env.NODE_ENV === 'production' ? '🥞' : err.stack
   });
 });
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
 
-// For testing purposes
 module.exports = app;
