@@ -20,7 +20,7 @@ const app = express();
 // CORS Configuration
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? 'https://your-vercel-frontend-url.vercel.app' // Replace placeholder
+    ? 'https://expense-tracer-git-main-yashrathore-03s-projects.vercel.app'
     : 'http://localhost:3000',
   credentials: true
 }));
