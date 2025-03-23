@@ -2,6 +2,12 @@
 
 A comprehensive MERN stack application for tracking personal and business expenses. This full-stack application allows users to create, read, update, and delete expenses, categorize them, and visualize spending patterns.
 
+# Service:
+https://expense-tracer-3o2e00vtd-yashrathore-03s-projects.vercel.app
+
+# Video Demonstration:
+https://drive.google.com/file/d/1NBobedHwyiHXbnC2Rm77aHXFo9OeJ2Mc/view?usp=drive_link
+
 ## Features
 
 - **User Authentication:** Secure signup and login functionality
